@@ -3,7 +3,7 @@
 # min 0.1.0
 # max 9.9.9
 
-var = "1.9.9"
+var = "9.9.8"
 s = var.split(".")
 f = []
 # if, first element is '0' for example '0.1.0'
@@ -17,9 +17,8 @@ if var != "9.9.9":
 		f += str(int("".join(var.split(".")))+1)
 	else:
 		print "no way!"
+	print "f", f
+	print "join", ".".join(f)
 else:
 	print "no way!"
-		
-print "f", f
-print "join", ".".join(f)
 
