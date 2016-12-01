@@ -34,20 +34,19 @@ def version_counter(ver):
 # file not empty (under consideration if empty lines)
 
 policyfile_name = 'policy_version.txt'
-# init ver_opaque for test, HOW TO READ OPAQUE??
-vers = '0.1.0'
-opa = 'a111'
 
 # EMPTY FILE
 def empty(filename):
+	# init vers & opaque for test, HOW TO READ OPAQUE??
+	vers = '0.1.0'
+	opa = 'a111'
 	with open(filename, 'r+') as ef:
 		ef.write(vers + ':' + opa + '\n')
 
 # NOT EMPTY FILE
 def not_empty(filename):
-	#read last line from file
-	line = subprocess.check_output(['tail', '-1', filename])
-	vers, opa = line.strip().split(":")
+	last_line = subprocess.check_output(['tail', '-1', filename])
+	vers, opa = last_line.strip().split(":")
 	with open(filename, 'a') as ef:
 		ef.write(version_counter(vers) + ':' + opa + '\n')
 
@@ -65,7 +64,8 @@ def main(filename):
 	if os.path.isfile(filename):
 		empty_or_not(filename)
 	else:
-		print "{} doesn't exist but I created it".format(filename)
+		print "{} doesn't exist but I created it, nice isn't it? ;]".format(filename)
+		# file with permission 664
 		subprocess.call(['touch', filename])
 		empty_or_not(filename)
 

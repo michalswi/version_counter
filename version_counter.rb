@@ -5,8 +5,6 @@
 
 # TO DO
 """
-check if policy_version.txt exist, if exist is it empty or not
-
 insert initial entry to policy_version.txt if empty/newly created:
 0.1.0:<first_opaque_id_for_specific_policyfile>
 
@@ -57,25 +55,49 @@ version_counter(var)
 # file not empty (under consideration if empty lines)
 
 policyfile_name = 'policy_version.txt'
-# init ver_opaque for test, how to read it?
-vers = '0.1.0'
-opa = 'a111'
-
-# MAIN
 
 # EMPTY FILE
 def empty(filename)
-	pass
+	# init vers & opaque for test, HOW TO READ OPAQUE??
+	vers = '0.1.0'
+	opa = 'a111'
+	File.open(filename, 'w') do |file|
+		file.write("#{vers}:#{opa}\n")
+	end
 end
-
+		
 # NOT EMPTY FILE
 def not_empty(filename)
-	pass
+	last_line = File.open(filename).to_a.last.chomp
+	vers, opa = last_line.strip().split(":")
+	File.open(filename, 'a') do |file|
+		file.write("#{version_counter(vers)}:#{opa}\n")
+	end
 end
 
+# EMPTY OR NOT
+def empty_or_not(filename)
+	p File.size?(filename)
+	if File.size?(filename) == nil
+		p "empty"
+		empty(filename)
+	else
+		p "not empty"
+		not_empty(filename)
+	end
+end
+
+# MAIN
 def main(filename)
+	# if file exist
 	if File.file?("#{filename}")
-		
+		empty_or_not(filename)
+	# else, doesn't exist, create
+	else
+		p "#{filename} doesn't exist but I created it, nice isn't it? ;]"
+		# file with permission 664
+		File.new(filename,'w+')
+		empty_or_not(filename)
 	end
 end
 
