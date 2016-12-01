@@ -20,53 +20,54 @@ def version_counter(ver):
 			f += str(int("".join(ver.split(".")))+1)
 		else:
 			print "no way!"
-			sys.exit(1)
+			sys.exit("bye!")
 		f = ".".join(f)
 		print f
 		return f
 	else:
 		print "no way!"
-		sys.exit(1)
+		sys.exit("bye!")
 
 ## WORK WITH FILE
 # TO DO:
 # file empty
 # file not empty (under consideration if empty lines)
-# 0.1.0:a581c4eafe218245ad4c301fece6f5134aa46dee0e2615e5889467542ec9f7d3
 
-filename = 'policy_version.txt'
-# init ver_opaque for test, how to read it?
+policyfile_name = 'policy_version.txt'
+# init ver_opaque for test, HOW TO READ OPAQUE??
 vers = '0.1.0'
 opa = 'a111'
 
 # EMPTY FILE
-def empty():
+def empty(filename):
 	with open(filename, 'r+') as ef:
 		ef.write(vers + ':' + opa + '\n')
 
 # NOT EMPTY FILE
-def not_empty():
+def not_empty(filename):
 	#read last line from file
 	line = subprocess.check_output(['tail', '-1', filename])
 	vers, opa = line.strip().split(":")
 	with open(filename, 'a') as ef:
 		ef.write(version_counter(vers) + ':' + opa + '\n')
 
-# MAIN
-def main():
-	if os.path.isfile('./{}'.format(filename)):
-		#print "it is"
-		#print os.path.getsize(filename)
-		if os.path.getsize(filename) == 0:
-			print "empty"
-			empty()
-		else:
-			print "not empty"
-			not_empty()
+# EMPTY OR NOT
+def empty_or_not(filename):
+	if os.path.getsize(filename) == 0:
+		print "empty"
+		empty(filename)
+	else:
+		print "not empty"
+		not_empty(filename)	
 
+# MAIN
+def main(filename):
+	if os.path.isfile(filename):
+		empty_or_not(filename)
+	else:
+		print "{} doesn't exist but I created it".format(filename)
+		subprocess.call(['touch', filename])
+		empty_or_not(filename)
 
 if __name__ == '__main__':
-    try:
-        main()
-    except KeyboardInterrupt:
-        pass
+	main(policyfile_name)
