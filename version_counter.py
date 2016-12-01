@@ -1,29 +1,72 @@
 #!/usr/bin/env python
 import os
+import subprocess
+import sys
+
 # min 0.1.0
+# next 0.1.1
 # max 9.9.9
 
-var = "0.9.8"
-s = var.split(".")
-f = []
-
 ## VERSION COUNTER
-# if, first element is '0' for example '0.1.0'
-if var != "9.9.9":
-	if int(s[0]) == 0 and var != "0.9.9":
-		f += "0"
-		f += str(int("".join(s[1:]))+1)
-	elif var == "0.9.9" or 0 < int(s[0]) <= 9:
-		f += str(int("".join(var.split(".")))+1)
+def version_counter(ver):
+	s = ver.split(".")
+	f = []
+	# if, first element is '0' for example '0.1.0'
+	if ver != "9.9.9":
+		if int(s[0]) == 0 and ver != "0.9.9":
+			f += "0"
+			f += str(int("".join(s[1:]))+1)
+		elif var == "0.9.9" or 0 < int(s[0]) <= 9:
+			f += str(int("".join(ver.split(".")))+1)
+		else:
+			print "no way!"
+			sys.exit(1)
+		f = ".".join(f)
+		print f
+		return f
 	else:
 		print "no way!"
-	f = ".".join(f)
-	print f
-else:
-	print "no way!"
+		sys.exit(1)
 
 ## WORK WITH FILE
+# TO DO:
+# file empty
+# file not empty (under consideration if empty lines)
+# 0.1.0:a581c4eafe218245ad4c301fece6f5134aa46dee0e2615e5889467542ec9f7d3
+
 filename = 'policy_version.txt'
-if os.path.isfile('./{}'.format(filename)):
-	print "it is"
-	#with open()
+# init ver_opaque for test, how to read it?
+vers = '0.1.0'
+opa = 'a111'
+
+# EMPTY FILE
+def empty():
+	with open(filename, 'r+') as ef:
+		ef.write(vers + ':' + opa + '\n')
+
+# NOT EMPTY FILE
+def not_empty():
+	#read last line from file
+	line = subprocess.check_output(['tail', '-1', filename])
+	vers, opa = line.strip().split(":")
+	with open(filename, 'a') as ef:
+		ef.write(version_counter(vers) + ':' + opa + '\n')
+
+# MAIN
+def main():
+	if os.path.isfile('./{}'.format(filename)):
+		#print "it is"
+		#print os.path.getsize(filename)
+		if os.path.getsize(filename) == 0:
+			print "empty"
+			empty()
+		else:
+			print "not empty"
+			not_empty()
+
+
+if __name__ == '__main__':
+    try:
+        main()
+    except KeyboardInterrupt:
+        pass
