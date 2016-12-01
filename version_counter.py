@@ -6,6 +6,7 @@
 var = "0.9.8"
 s = var.split(".")
 f = []
+
 # if, first element is '0' for example '0.1.0'
 if var != "9.9.9":
 	if int(s[0]) == 0 and var != "0.9.9":
