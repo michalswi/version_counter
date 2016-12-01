@@ -21,6 +21,7 @@ var = "0.9.9"
 s = var.split(".")
 f = []
 
+## VERSION COUNTER
 # if, first element is '0' for example '0.1.0'
 if var != "9.9.9"
 	if s[0].to_i == 0 && var != "0.9.9"
