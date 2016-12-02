@@ -1,5 +1,5 @@
 {
-  "revision_id": "6fc7f3d04ab0507bfaf894b309a4c87a4c7fac309c78486efeaeadc253df4893",
+  "revision_id": "6fc3aaaaaaaaa",
   "name": "dummy_policy",
   "run_list": [
     "recipe[dummy_test::default]"
@@ -7,7 +7,7 @@
   "cookbook_locks": {
     "dummy_test": {
       "version": "0.1.0",
-      "identifier": "1f96687729b0385e8ee5624c3d7e80fb508685c1",
+      "identifier": "1f966729b0385e8ee5624c3d7e80fb508685c1",
       "dotted_decimal_identifier": "8891099698016312.26615763658620286.141816876139969",
       "source": ".",
       "cache_key": null,
