@@ -6,7 +6,9 @@ counter written in python [in progress]
 counter written in ruby [in progress]
 
 'counter' based on *.lock.json file from dummy_test(simple chef cookbook) where are created two policyfiles.
-lock.json is a must if doesn't exist should be created.
+
+if lock.json doesn't exist should be created.
+
 what 'counter' do:
 - create policyfile version file (if not already exist) based on lock.json name e.g. Policyfile.lock.json, version file will be called 'Policyfile',
 - take from Policyfile.lock.json id_revision, add to 'Policyfile' with the proper version for example:
