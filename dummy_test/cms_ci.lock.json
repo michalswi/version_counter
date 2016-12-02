@@ -1,5 +1,5 @@
 {
-  "revision_id": "6fc3aaaaaaaaa",
+  "revision_id": "6fc3aaaaakkkkkkkkkkkkkkaaaa",
   "name": "dummy_policy",
   "run_list": [
     "recipe[dummy_test::default]"

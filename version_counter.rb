@@ -1,17 +1,11 @@
 #!/usr/bin/env ruby
 
 # min 0.1.0
+# next 0.1.1
 # max 9.9.9
 
 # TO DO
 """
-insert initial entry to policy_version.txt if empty/newly created:
-0.1.0:<first_opaque_id_for_specific_policyfile>
-
-how to get opaque
-
-read policy_version.txt if exist, check version and opaque, if new version/opaque add to file
-
 merge script with rake (not sure if needed)
 """
 
@@ -37,13 +31,12 @@ def version_counter(ver)
 			end
 		else
 			p "no way!"
-			abort("bye!")
 		end
 		p f[0..-1].map { |k| "#{k}" }.join(".")
 		return f[0..-1].map { |k| "#{k}" }.join(".")
 	else
-		p "no way!"
-		abort("bye!")
+		p "Can't proceed with version 9.9.9"
+		return ver
 	end
 end
 
@@ -51,54 +44,88 @@ version_counter(var)
 
 ## WORK WITH FILE
 # TO DO:
-# file empty
 # file not empty (under consideration if empty lines)
-
-policyfile_name = 'policy_version.txt'
+# what happen if one of the policies version is 9.9.9 ? -> policyver.write(version_counter(vers).... append the same line
 
 # EMPTY FILE
-def empty(filename)
-	# init vers & opaque for test, HOW TO READ OPAQUE??
+def empty(filename, id_revision)
+	p "run 'empty' function"
+	# initial version is always 0.1.0
 	vers = '0.1.0'
-	opa = 'a111'
-	File.open(filename, 'w') do |file|
-		file.write("#{vers}:#{opa}\n")
+	File.open(filename, 'w') do |ef|
+		ef.write("#{vers}:#{id_revision}\n")
 	end
 end
 		
-# NOT EMPTY FILE
-def not_empty(filename)
-	last_line = File.open(filename).to_a.last.chomp
-	vers, opa = last_line.strip().split(":")
-	File.open(filename, 'a') do |file|
-		file.write("#{version_counter(vers)}:#{opa}\n")
+# NOT EMPTY FILE*
+def not_empty(filename, id_revision)
+	p "run 'not_empty' function"
+	#last_line = File.open(filename).to_a.last.chomp
+	#vers, opa = last_line.strip().split(":")
+	File.open(filename, 'a+') do |policyver|
+		var = policyver.readlines()
+		var.each do |i|
+			vers, opa = i.split(':')
+			if opa.chomp() == id_revision
+				p "For #{filename} requested id_revision:#{id_revision} already exist under version:#{vers}"
+				break
+			else
+				policyver.write("#{version_counter(vers)}:#{id_revision}\n")
+			end
+		end
 	end
 end
 
 # EMPTY OR NOT
-def empty_or_not(filename)
-	p File.size?(filename)
+def empty_or_not(filename, id_revision)
 	if File.size?(filename) == nil
-		p "empty"
-		empty(filename)
+		p "-> empty"
+		empty(filename, id_revision)
 	else
-		p "not empty"
-		not_empty(filename)
+		p "-> not empty"
+		not_empty(filename, id_revision)
 	end
 end
 
 # MAIN
-def main(filename)
-	# if file exist
+def main(filename, id_revision)
 	if File.file?("#{filename}")
-		empty_or_not(filename)
-	# else, doesn't exist, create
+		# ->
+		empty_or_not(filename, id_revision)
 	else
 		p "#{filename} doesn't exist but I created it, nice isn't it? ;]"
 		# file with permission 664
 		File.new(filename,'w+')
-		empty_or_not(filename)
+		# ->
+		empty_or_not(filename, id_revision)
 	end
 end
 
-main(policyfile_name)
+# VERIFY IF LOCK.JSON EXIST
+def if_json_exist()
+	dix = {}
+	lock_j = Dir.glob("./dummy_test/*.lock.json")
+	if lock_j != []
+		lock_j.each do |f|
+			File.open(f) do |id_rev|
+				var = id_rev.readlines()[1].split(':')[1].chomp()
+				regexp = /[\w\d]+/.match(var)
+				dix[f.split('/')[-1]] = Regexp.last_match[0]
+			end
+		end
+	end
+	if dix.any?
+		return dix
+	else
+		abort("no lock.json!")
+	end
+end
+
+#p if_json_exist()
+
+if_json_exist().each do |f|
+	main(f[0].split('.')[0],f[1])
+end
+
+#policyfile_name = 'policy_version.txt'
+#main(policyfile_name)
