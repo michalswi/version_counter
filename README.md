@@ -1,12 +1,11 @@
 # version_counter
 https://docs.chef.io/policyfile.html
 
-counter written in python [in progress]
-
-counter written in ruby [in progress]
+### available counters
+- counter written in ruby
+- counter written in python
 
 ### how it works
-
 'counter' based on *.lock.json file from dummy_test(simple chef cookbook) where are created two policyfiles.
 
 if lock.json doesn't exist should be created.
