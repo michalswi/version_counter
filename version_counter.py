@@ -2,6 +2,7 @@
 import os
 import subprocess
 import sys
+import re
 
 # min 0.1.0
 # next 0.1.1
@@ -25,7 +26,7 @@ def version_counter(ver):
 		print f
 		return f
 	else:
-		print "no way!"
+		print "end here, current version is 9.9.9"
 		sys.exit("bye!")
 
 ## WORK WITH FILE
@@ -68,6 +69,26 @@ def main(filename):
 		# file with permission 664
 		subprocess.call(['touch', filename])
 		empty_or_not(filename)
+
+# VERIFY IF LOCK.JSON EXIST
+def if_json_exist():
+	dix = {}
+	for f in os.listdir('./dummy_test'):
+		if f.endswith('.lock.json'):
+			with open('./dummy_test/{}'.format(f)) as policy_json:
+				#print policy_json.readlines()[1]						# "revision_id": "a2222222",
+				var = policy_json.readlines()[1].split(':')[1]		# "a2222222",
+				regex = r"(?<=\")([^\"]+)(?=\")"
+				m = re.search(regex, var)
+				dix[f] = m.group()
+	# check if not empty
+	if bool(dix):
+		return dix
+	else:
+		print "no lock.json!"
+		sys.exit()
+
+print if_json_exist()
 
 if __name__ == '__main__':
 	main(policyfile_name)
