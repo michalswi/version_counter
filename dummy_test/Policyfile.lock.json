@@ -1,5 +1,5 @@
 {
-  "revision_id": "6fc4c7fac309c78486efeaeadc253df4893",
+  "revision_id": "fed7f9f8576bc906504e708defbcd53333b919ac2867b336ae0503853479eb1b",
   "name": "dummy_policy",
   "run_list": [
     "recipe[dummy_test::default]"
@@ -7,14 +7,14 @@
   "cookbook_locks": {
     "dummy_test": {
       "version": "0.1.0",
-      "identifier": "1f966729b0385e8ee5624c3d7e80fb508685c1",
-      "dotted_decimal_identifier": "8891099698016312.26615763658620286.141816876139969",
+      "identifier": "abc4f65241d140f21042257bf09f4a2981b5a19c",
+      "dotted_decimal_identifier": "48348783238566208.68134820646744223.81542130278812",
       "source": ".",
       "cache_key": null,
       "scm_info": {
         "scm": "git",
         "remote": "git@github.ibm.com:michal-swierczewski/version_counter.git",
-        "revision": "ba42a0a94f902ed80defd2c6539924636fba66cb",
+        "revision": "614e0ee4f565e0b667a82df4c4b2931f38c8a30b",
         "working_tree_clean": false,
         "published": true,
         "synchronized_remote_branches": [

@@ -26,7 +26,6 @@ def version_counter(ver):
 	else:
 		print "Can't proceed with version 9.9.9"
 		return ver
-		
 
 ## WORK WITH FILE
 # TO DO:

@@ -9,8 +9,6 @@
 merge script with rake (not sure if needed)
 """
 
-var = "0.1.0"
-
 ## VERSION COUNTER
 def version_counter(ver)
 	s = ver.split(".")
@@ -39,8 +37,6 @@ def version_counter(ver)
 		return ver
 	end
 end
-
-version_counter(var)
 
 ## WORK WITH FILE
 # TO DO:
@@ -120,8 +116,6 @@ def if_json_exist()
 		abort("no lock.json!")
 	end
 end
-
-#p if_json_exist()
 
 if_json_exist().each do |f|
 	main(f[0].split('.')[0],f[1])
