@@ -1,5 +1,5 @@
 {
-  "revision_id": "79fcaeec79c300f7a99cca36d077ebfb42eb4c9cc98c3fa0c6b870d6262cc041",
+  "revision_id": "79fca870d6262cc041",
   "name": "dummy_policy2",
   "run_list": [
     "recipe[ntp::default]"

@@ -65,15 +65,15 @@ def empty_or_not(filename, id_revision):
 
 # MAIN
 def main(filename, id_revision):
-	if os.path.isfile(filename):
+	if os.path.isfile('./versions/{}'.format(filename)):
 		# ->
-		empty_or_not(filename, id_revision)
+		empty_or_not('./versions/{}'.format(filename), id_revision)
 	else:
 		print "{} doesn't exist but I created it, nice isn't it? ;]".format(filename)
 		# file with permission 664
-		subprocess.call(['touch', filename])
+		subprocess.call(['touch', './versions/{}'.format(filename)])
 		# ->
-		empty_or_not(filename, id_revision)
+		empty_or_not('./versions/{}'.format(filename), id_revision)
 
 # VERIFY IF LOCK.JSON EXIST
 def if_json_exist():
@@ -92,9 +92,15 @@ def if_json_exist():
 		print "no lock.json!"
 		sys.exit()
 
-if __name__ == '__main__':
+# RUN main()
+def run():
 	for i in if_json_exist().items():
 		main(i[0].split('.')[0], i[1])
-
-#policyfile_name = 'policy_version.txt'	
-#main(policyfile_name)
+	
+# EXECUTE script
+if __name__ == '__main__':
+	if os.path.isdir('./versions'):
+		run()
+	else:
+		os.system('mkdir -p versions')
+		run()

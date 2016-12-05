@@ -1,5 +1,5 @@
 {
-  "revision_id": "fed7f9f8576bc906504e708defbcd53333b919ac2867b336ae0503853479eb1b",
+  "revision_id": "fac2867b336ae0503853479eb1b",
   "name": "dummy_policy",
   "run_list": [
     "recipe[dummy_test::default]"

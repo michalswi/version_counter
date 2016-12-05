@@ -4,11 +4,6 @@
 # next 0.1.1
 # max 9.9.9
 
-# TO DO
-"""
-merge script with rake (not sure if needed)
-"""
-
 ## VERSION COUNTER
 def version_counter(ver)
 	s = ver.split(".")
@@ -85,15 +80,15 @@ end
 
 # MAIN
 def main(filename, id_revision)
-	if File.file?("#{filename}")
+	if File.file?("./versions/#{filename}")
 		# ->
-		empty_or_not(filename, id_revision)
+		empty_or_not("./versions/#{filename}", id_revision)
 	else
 		p "#{filename} doesn't exist but I created it, nice isn't it? ;]"
 		# file with permission 664
-		File.new(filename,'w+')
+		File.new("./versions/#{filename}",'w+')
 		# ->
-		empty_or_not(filename, id_revision)
+		empty_or_not("./versions/#{filename}", id_revision)
 	end
 end
 
@@ -105,7 +100,7 @@ def if_json_exist()
 		lock_j.each do |f|
 			File.open(f) do |id_rev|
 				var = id_rev.readlines()[1].split(':')[1].chomp()
-				regexp = /[\w\d]+/.match(var)
+				/[\w\d]+/.match(var)
 				dix[f.split('/')[-1]] = Regexp.last_match[0]
 			end
 		end
@@ -117,9 +112,17 @@ def if_json_exist()
 	end
 end
 
-if_json_exist().each do |f|
-	main(f[0].split('.')[0],f[1])
+# RUN main()
+def run()
+	if_json_exist().each do |f|
+		main(f[0].split('.')[0],f[1])
+	end
 end
 
-#policyfile_name = 'policy_version.txt'
-#main(policyfile_name)
+# EXECUTE script
+if Dir.exists?('./versions')
+	run()
+else
+	Dir.mkdir('versions')
+	run()
+end
