@@ -40,7 +40,6 @@ end
 
 # EMPTY FILE
 def empty(filename, id_revision)
-	p "run 'empty' function"
 	# initial version is always 0.1.0
 	vers = '0.1.0'
 	File.open(filename, 'w') do |ef|
@@ -50,7 +49,6 @@ end
 		
 # NOT EMPTY FILE*
 def not_empty(filename, id_revision)
-	p "run 'not_empty' function"
 	#last_line = File.open(filename).to_a.last.chomp
 	#vers, opa = last_line.strip().split(":")
 	File.open(filename, 'a+') do |policyver|
@@ -70,10 +68,8 @@ end
 # EMPTY OR NOT
 def empty_or_not(filename, id_revision)
 	if File.size?(filename) == nil
-		p "-> empty"
 		empty(filename, id_revision)
 	else
-		p "-> not empty"
 		not_empty(filename, id_revision)
 	end
 end

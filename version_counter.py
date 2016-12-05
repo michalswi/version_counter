@@ -34,7 +34,6 @@ def version_counter(ver):
 
 # EMPTY FILE
 def empty(filename, id_revision):
-	print "empty function"
 	# initial version is always 0.1.0
 	vers = '0.1.0'
 	with open(filename, 'r+') as ef:
@@ -42,7 +41,6 @@ def empty(filename, id_revision):
 
 # NOT EMPTY FILE
 def not_empty(filename, id_revision):
-	print "not_empty function"
 	#last_line = subprocess.check_output(['tail', '-1', filename])
 	#vers, opa = last_line.strip().split(":")
 	with open(filename, 'a+') as policyver:
@@ -57,10 +55,8 @@ def not_empty(filename, id_revision):
 # EMPTY OR NOT
 def empty_or_not(filename, id_revision):
 	if os.path.getsize(filename) == 0:
-		print "-> empty"
 		empty(filename, id_revision)
 	else:
-		print "-> not empty"
 		not_empty(filename, id_revision)	
 
 # MAIN
