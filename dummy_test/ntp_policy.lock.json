@@ -1,0 +1,102 @@
+{
+  "revision_id": "82be6cd7b3ebaecc4f2c538fc277876d4ca0a1bb46cf1aa91dfd09534f03f88b",
+  "name": "ntp_policy",
+  "run_list": [
+    "recipe[ntp::default]"
+  ],
+  "cookbook_locks": {
+    "ntp": {
+      "version": "3.0.0",
+      "identifier": "6a84d7d3176d57ba93fe2154d81caaa69afd48da",
+      "dotted_decimal_identifier": "29982410025692503.52517065358366748.187632541583578",
+      "cache_key": "ntp-3.0.0-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/ntp/versions/3.0.0/download",
+      "source_options": {
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/ntp/versions/3.0.0/download",
+        "version": "3.0.0"
+      }
+    },
+    "windows": {
+      "version": "2.1.1",
+      "identifier": "a303fabd4290e471f52e27ca38494a2babcce611",
+      "dotted_decimal_identifier": "45884796655800548.32076250953168969.81551426381329",
+      "cache_key": "windows-2.1.1-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/windows/versions/2.1.1/download",
+      "source_options": {
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/windows/versions/2.1.1/download",
+        "version": "2.1.1"
+      }
+    },
+    "ohai": {
+      "version": "4.2.3",
+      "identifier": "20d9cd82c42bf449a33c37673a7f3e0b71ad6f35",
+      "dotted_decimal_identifier": "9246675940158452.20727152322755199.68218872753973",
+      "cache_key": "ohai-4.2.3-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/ohai/versions/4.2.3/download",
+      "source_options": {
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/ohai/versions/4.2.3/download",
+        "version": "4.2.3"
+      }
+    },
+    "compat_resource": {
+      "version": "12.16.2",
+      "identifier": "ae22c628790a712a227e1045a1cfde6a45af12e3",
+      "dotted_decimal_identifier": "49014880425544305.11859873856070095.244548017001187",
+      "cache_key": "compat_resource-12.16.2-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/compat_resource/versions/12.16.2/download",
+      "source_options": {
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/compat_resource/versions/12.16.2/download",
+        "version": "12.16.2"
+      }
+    }
+  },
+  "default_attributes": {
+
+  },
+  "override_attributes": {
+
+  },
+  "solution_dependencies": {
+    "Policyfile": [
+      [
+        "ntp",
+        "= 3.0.0"
+      ],
+      [
+        "windows",
+        "= 2.1.1"
+      ],
+      [
+        "ohai",
+        "= 4.2.3"
+      ],
+      [
+        "compat_resource",
+        "= 12.16.2"
+      ]
+    ],
+    "dependencies": {
+      "ntp (3.0.0)": [
+        [
+          "windows",
+          ">= 1.38.0"
+        ]
+      ],
+      "windows (2.1.1)": [
+        [
+          "ohai",
+          ">= 4.0.0"
+        ]
+      ],
+      "ohai (4.2.3)": [
+        [
+          "compat_resource",
+          ">= 12.14.7"
+        ]
+      ],
+      "compat_resource (12.16.2)": [
+
+      ]
+    }
+  }
+}

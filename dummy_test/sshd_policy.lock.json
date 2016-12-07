@@ -1,0 +1,39 @@
+{
+  "revision_id": "9dd5c183867d44b44a1267ccebecb25a1d699a5b792d2622cf5787a930858d2d",
+  "name": "sshd_policy",
+  "run_list": [
+    "recipe[sshd::default]"
+  ],
+  "cookbook_locks": {
+    "sshd": {
+      "version": "1.0.0",
+      "identifier": "a855249a4ddb4b2feedb4d897c406faa4e557d78",
+      "dotted_decimal_identifier": "47381411783367499.13491949571505216.122777249348984",
+      "cache_key": "sshd-1.0.0-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/sshd/versions/1.0.0/download",
+      "source_options": {
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/sshd/versions/1.0.0/download",
+        "version": "1.0.0"
+      }
+    }
+  },
+  "default_attributes": {
+
+  },
+  "override_attributes": {
+
+  },
+  "solution_dependencies": {
+    "Policyfile": [
+      [
+        "sshd",
+        "= 1.0.0"
+      ]
+    ],
+    "dependencies": {
+      "sshd (1.0.0)": [
+
+      ]
+    }
+  }
+}
