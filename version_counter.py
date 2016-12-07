@@ -51,14 +51,17 @@ def if_json_exist():
 		sys.exit()
 
 # CREATE tarball
-def tar(dic):
-	if 'tarball' in os.listdir('.'):
-		# how to avoid creating the same tarballs one more time?
-		print dic.values()
-		print [i for i in os.listdir('./tarball')]
+def tar(item):
+	# e.g. item:
+	# ('ntp_policy.lock.json', '82be6cd7b3ebaecc4f2c538fc277876d4ca0a1bb46cf1aa91dfd09534f03f88b')
+	pol = item[0].split('.')[0]
+	rev_id = item[1]
+	to_check = "{}-{}.tgz".format(pol,rev_id)
+	os.system('mkdir -p ./tarball')
+	if to_check in os.listdir('./tarball'):
+		print to_check + " already exist"
 	else:
-		for i in dic.keys():
-			os.system("chef export ./dummy_test/{}.rb -a tarball".format(i.split('.')[0]))
+		os.system("chef export ./dummy_test/{}.rb -a tarball".format(pol))
 				
 # EMPTY FILE
 def empty(filename, id_revision):
@@ -103,14 +106,12 @@ def main(filename, id_revision):
 def run():
 	for i in if_json_exist().items():
 		main(i[0].split('.')[0], i[1])
+		tar(i)
 		
 # EXECUTE script
 if __name__ == '__main__':
 	if os.path.isdir('./versions'):
 		run()
-		tar(if_json_exist())
 	else:
 		os.system('mkdir -p versions')
-		run()
-		tar(if_json_exist())
-	
+		run()	

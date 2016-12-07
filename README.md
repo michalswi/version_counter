@@ -24,4 +24,4 @@ What 'counter' do:
 
 0.1.1:fed7f9f8576bc906504e708defbcd53333b919ac2867b336ae05038534712345
 
-- 'counter' based on policyfiles will create tarballs in directory 'tarball'
+- 'counter' based on policyfiles will generate tarballs in directory 'tarball'
