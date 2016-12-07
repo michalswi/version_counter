@@ -38,12 +38,42 @@ end
 # file not empty (under consideration if empty lines)
 # what happen if one of the policies version is 9.9.9 ? -> policyver.write(version_counter(vers).... append the same line
 
+# VERIFY IF LOCK.JSON EXIST
+def if_json_exist()
+	dix = {}
+	lock_j = Dir.glob("./dummy_test/*.lock.json")
+	if lock_j != []
+		lock_j.each do |f|
+			File.open(f) do |id_rev|
+				var = id_rev.readlines()[1].split(':')[1].chomp()
+				/[\w\d]+/.match(var)
+				dix[f.split('/')[-1]] = Regexp.last_match[0]
+			end
+		end
+	end
+	if dix.any?
+		return dix
+	else
+		abort("no lock.json!")
+	end
+end
+
+# CREATE tarball
+def tar(dic)
+	#p dic.keys()
+	dic.each do |i|
+		system "chef export ./dummy_test/#{i[0].split('.')[0]}.rb -a tarball"
+		p i
+	end
+end
+
 # EMPTY FILE
 def empty(filename, id_revision)
 	# initial version is always 0.1.0
 	vers = '0.1.0'
 	File.open(filename, 'w') do |ef|
 		ef.write("#{vers}:#{id_revision}\n")
+		tar(if_json_exist())
 	end
 end
 		
@@ -60,6 +90,7 @@ def not_empty(filename, id_revision)
 				break
 			else
 				policyver.write("#{version_counter(vers)}:#{id_revision}\n")
+				tar(if_json_exist())
 			end
 		end
 	end
@@ -80,31 +111,11 @@ def main(filename, id_revision)
 		# ->
 		empty_or_not("./versions/#{filename}", id_revision)
 	else
-		p "#{filename} doesn't exist but I created it, nice isn't it? ;]"
+		p "#{filename} was created"
 		# file with permission 664
 		File.new("./versions/#{filename}",'w+')
 		# ->
 		empty_or_not("./versions/#{filename}", id_revision)
-	end
-end
-
-# VERIFY IF LOCK.JSON EXIST
-def if_json_exist()
-	dix = {}
-	lock_j = Dir.glob("./dummy_test/*.lock.json")
-	if lock_j != []
-		lock_j.each do |f|
-			File.open(f) do |id_rev|
-				var = id_rev.readlines()[1].split(':')[1].chomp()
-				/[\w\d]+/.match(var)
-				dix[f.split('/')[-1]] = Regexp.last_match[0]
-			end
-		end
-	end
-	if dix.any?
-		return dix
-	else
-		abort("no lock.json!")
 	end
 end
 

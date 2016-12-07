@@ -1,5 +1,5 @@
 {
-  "revision_id": "fac2867b336ae0503853479eb1b",
+  "revision_id": "fed7f9f8576bc906504e708defbcd53333b919ac2867b336ae0503853479eb1b",
   "name": "dummy_policy",
   "run_list": [
     "recipe[dummy_test::default]"
@@ -14,7 +14,7 @@
       "scm_info": {
         "scm": "git",
         "remote": "git@github.ibm.com:michal-swierczewski/version_counter.git",
-        "revision": "614e0ee4f565e0b667a82df4c4b2931f38c8a30b",
+        "revision": "357f5b2e0cef3ddeb9f1d0962c16cdab3dd336f4",
         "working_tree_clean": false,
         "published": true,
         "synchronized_remote_branches": [
