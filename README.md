@@ -2,12 +2,13 @@
 https://docs.chef.io/policyfile.html
 
 ### available counters
-- counter written in ruby[here](https://github.ibm.com/michal-swierczewski/version_counter/blob/master/version_counter.rb)
-- counter written in python[here](https://github.ibm.com/michal-swierczewski/version_counter/blob/master/version_counter.py)
+- counter written in ruby [here](https://github.ibm.com/michal-swierczewski/version_counter/blob/master/version_counter.rb)
+- counter written in python [here](https://github.ibm.com/michal-swierczewski/version_counter/blob/master/version_counter.py)
 
 ### how it works
-'counter' based on *.lock.json files from dummy_test(simple chef cookbook) where are created two policyfiles (Policyfile.rb and Policyfile2.rb).    
-If lock.json doesn't exist should be created. What 'counter' do:
+'counter' based on *.lock.json files from dummy_test(simple chef cookbook) where are created two policyfiles (Policyfile.rb and Policyfile2.rb). If lock.json doesn't exist should be created. 
+
+What 'counter' do:
 
 - create './versions' directory (if doesn't exist already) where policy version file will be stored,
 - create policy version file (if doesn't exist already) based on lock.json name e.g. Policyfile.lock.json, policy version file will be called 'Policyfile' and stored in './versions'
