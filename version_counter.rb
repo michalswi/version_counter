@@ -52,6 +52,7 @@ def if_json_exist()
 		end
 	end
 	if dix.any?
+		# dix: *.lock.json:revision_id
 		return dix
 	else
 		abort("no lock.json!")
@@ -60,9 +61,13 @@ end
 
 # CREATE tarball
 def tar(dic)
-	#p dic.keys()
-	dic.each do |i|
-		system "chef export ./dummy_test/#{i[0].split('.')[0]}.rb -a tarball"
+	if File.directory?("./tarball")
+		# how to avoid creating the same tarballs one more time?
+		p "exist"
+	else
+		dic.each do |i|
+			system "chef export ./dummy_test/#{i[0].split('.')[0]}.rb -a tarball"
+		end
 	end
 end
 
@@ -72,7 +77,6 @@ def empty(filename, id_revision)
 	vers = '0.1.0'
 	File.open(filename, 'w') do |ef|
 		ef.write("#{vers}:#{id_revision}\n")
-		tar(if_json_exist())
 	end
 end
 		
@@ -89,7 +93,6 @@ def not_empty(filename, id_revision)
 				break
 			else
 				policyver.write("#{version_counter(vers)}:#{id_revision}\n")
-				tar(if_json_exist())
 			end
 		end
 	end
@@ -128,7 +131,9 @@ end
 # EXECUTE script
 if Dir.exists?('./versions')
 	run()
+	tar(if_json_exist())
 else
 	Dir.mkdir('versions')
 	run()
+	tar(if_json_exist())
 end

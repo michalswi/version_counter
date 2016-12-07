@@ -44,6 +44,7 @@ def if_json_exist():
 				dix[f] = m.group()
 	# check if not empty
 	if bool(dix):
+		# dix: *.lock.json:revision_id
 		return dix
 	else:
 		print "no lock.json!"
@@ -51,8 +52,13 @@ def if_json_exist():
 
 # CREATE tarball
 def tar(dic):
-	for i in dic.keys():
-		os.system("chef export ./dummy_test/{}.rb -a tarball".format(i.split('.')[0]))
+	if 'tarball' in os.listdir('.'):
+		# how to avoid creating the same tarballs one more time?
+		print dic.values()
+		print [i for i in os.listdir('./tarball')]
+	else:
+		for i in dic.keys():
+			os.system("chef export ./dummy_test/{}.rb -a tarball".format(i.split('.')[0]))
 				
 # EMPTY FILE
 def empty(filename, id_revision):
@@ -60,7 +66,6 @@ def empty(filename, id_revision):
 	vers = '0.1.0'
 	with open(filename, 'r+') as ef:
 		ef.write(vers + ':' + id_revision + '\n')
-		tar(if_json_exist())
 
 # NOT EMPTY FILE
 def not_empty(filename, id_revision):
@@ -74,7 +79,6 @@ def not_empty(filename, id_revision):
 				break
 			else:
 				policyver.write(version_counter(vers) + ':' + id_revision + '\n')
-				tar(if_json_exist())
 
 # EMPTY OR NOT
 def empty_or_not(filename, id_revision):
@@ -104,6 +108,9 @@ def run():
 if __name__ == '__main__':
 	if os.path.isdir('./versions'):
 		run()
+		tar(if_json_exist())
 	else:
 		os.system('mkdir -p versions')
 		run()
+		tar(if_json_exist())
+	

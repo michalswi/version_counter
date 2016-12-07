@@ -1,4 +1,4 @@
-# version_counter
+# policyfile version counter
 https://docs.chef.io/policyfile.html
 
 ### available counters
@@ -6,7 +6,9 @@ https://docs.chef.io/policyfile.html
 - counter written in python [here](https://github.ibm.com/michal-swierczewski/version_counter/blob/master/version_counter.py)
 
 ### how it works
-'counter' based on *.lock.json files from dummy_test(simple chef cookbook) where are created two policyfiles (Policyfile.rb and Policyfile2.rb). If lock.json doesn't exist should be created. 
+'counter' based on *.lock.json files from dummy_test(simple chef cookbook) where are created two policyfiles (Policyfile.rb and Policyfile2.rb). 
+
+If lock.json doesn't exist should be created. 
 
 What 'counter' do:
 
@@ -22,6 +24,4 @@ What 'counter' do:
 
 0.1.1:fed7f9f8576bc906504e708defbcd53333b919ac2867b336ae05038534712345
 
-- 'counter' based on policyfiles (Policyfile.rb and Policyfile2.rb) will create tarballs in directory 'tarball',
-
-- [in progress]
+- 'counter' based on policyfiles (Policyfile.rb and Policyfile2.rb) will create tarballs in directory 'tarball'
