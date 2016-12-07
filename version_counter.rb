@@ -63,7 +63,6 @@ def tar(dic)
 	#p dic.keys()
 	dic.each do |i|
 		system "chef export ./dummy_test/#{i[0].split('.')[0]}.rb -a tarball"
-		p i
 	end
 end
 

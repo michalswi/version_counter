@@ -14,7 +14,7 @@
       "scm_info": {
         "scm": "git",
         "remote": "git@github.ibm.com:michal-swierczewski/version_counter.git",
-        "revision": "357f5b2e0cef3ddeb9f1d0962c16cdab3dd336f4",
+        "revision": "75683459317060d7cb7d20dee53dd0ff2450852b",
         "working_tree_clean": false,
         "published": true,
         "synchronized_remote_branches": [
