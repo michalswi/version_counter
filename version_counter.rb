@@ -60,14 +60,17 @@ def if_json_exist()
 end
 
 # CREATE tarball
-def tar(dic)
-	if File.directory?("./tarball")
-		# how to avoid creating the same tarballs one more time?
-		p "exist"
+def tar(item)
+	# e.g. item:
+	# ('ntp_policy.lock.json', '82be6cd7b3ebaecc4f2c538fc277876d4ca0a1bb46cf1aa91dfd09534f03f88b')
+	pol = item[0].split('.')[0]
+	rev_id = item[1]
+	to_check = "./tarball/#{pol}-#{rev_id}.tgz"
+	system "mkdir -p ./tarball"
+	if Dir.glob("./tarball/*.tgz").include? to_check
+		p "#{rev_id} already exist"
 	else
-		dic.each do |i|
-			system "chef export ./dummy_test/#{i[0].split('.')[0]}.rb -a tarball"
-		end
+		system "chef export ./dummy_test/#{pol}.rb -a tarball"
 	end
 end
 
@@ -125,15 +128,14 @@ end
 def run()
 	if_json_exist().each do |f|
 		main(f[0].split('.')[0],f[1])
+		tar(f)
 	end
 end
 
 # EXECUTE script
 if Dir.exists?('./versions')
 	run()
-	tar(if_json_exist())
 else
 	Dir.mkdir('versions')
 	run()
-	tar(if_json_exist())
 end
