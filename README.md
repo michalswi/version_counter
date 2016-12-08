@@ -12,7 +12,7 @@ If lock.json doesn't exist should be created.
 
 What 'counter' do:
 
-- create './versions' directory (if doesn't exist already) where policy version file will be stored,
+- create './versions' directory (if doesn't exist already) where specific policy version file will be stored,
 - create policy version file (if doesn't exist already) based on lock.json name e.g. ntp_policy.lock.json, policy version file will be called 'ntp_policy' and stored in './versions'
 - take from ntp_policy.lock.json revision_id, add to './versions/ntp_policy' with the proper version for example:
 
