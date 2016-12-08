@@ -4,6 +4,10 @@
 # next 0.1.1
 # max 9.9.9
 
+## DIRECTORIES
+COOKBOOK = 'dummy_test'
+VERSIONS = 'versions'
+
 ## VERSION COUNTER
 def version_counter(ver)
 	s = ver.split(".")
@@ -41,7 +45,7 @@ end
 # VERIFY IF LOCK.JSON EXIST
 def if_json_exist()
 	dix = {}
-	lock_j = Dir.glob("./dummy_test/*.lock.json")
+	lock_j = Dir.glob("./#{COOKBOOK}/*.lock.json")
 	if lock_j != []
 		lock_j.each do |f|
 			File.open(f) do |id_rev|
@@ -70,7 +74,7 @@ def tar(item)
 	if Dir.glob("./tarball/*.tgz").include? to_check
 		p "#{rev_id} already exist"
 	else
-		system "chef export ./dummy_test/#{pol}.rb -a tarball"
+		system "chef export ./#{COOKBOOK}/#{pol}.rb -a tarball"
 	end
 end
 
@@ -112,15 +116,15 @@ end
 
 # MAIN
 def main(filename, id_revision)
-	if File.file?("./versions/#{filename}")
+	if File.file?("./#{VERSIONS}/#{filename}")
 		# ->
-		empty_or_not("./versions/#{filename}", id_revision)
+		empty_or_not("./#{VERSIONS}/#{filename}", id_revision)
 	else
 		p "#{filename} was created"
 		# file with permission 664
-		File.new("./versions/#{filename}",'w+')
+		File.new("./#{VERSIONS}/#{filename}",'w+')
 		# ->
-		empty_or_not("./versions/#{filename}", id_revision)
+		empty_or_not("./#{VERSIONS}/#{filename}", id_revision)
 	end
 end
 
@@ -133,9 +137,9 @@ def run()
 end
 
 # EXECUTE script
-if Dir.exists?('./versions')
+if Dir.exists?("./#{VERSIONS}")
 	run()
 else
-	Dir.mkdir('versions')
+	Dir.mkdir("#{VERSIONS}")
 	run()
 end

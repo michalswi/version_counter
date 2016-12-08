@@ -8,6 +8,10 @@ import re
 # next 0.1.1
 # max 9.9.9
 
+## DIRECTORIES
+COOKBOOK = 'dummy_test'
+VERSIONS = 'versions'
+
 ## VERSION COUNTER
 def version_counter(ver):
 	s = ver.split(".")
@@ -32,12 +36,15 @@ def version_counter(ver):
 # file not empty (under consideration if empty lines)
 # what happen if one of the policies version is 9.9.9 ? -> policyver.write(version_counter(vers).... append the same line
 
+
+# sprawdzic co sie stanie jesli jedno policy ma 3 wersje a inne policy tylko 1
+
 # VERIFY IF LOCK.JSON EXIST
 def if_json_exist():
 	dix = {}
-	for f in os.listdir('./dummy_test'):
+	for f in os.listdir(COOKBOOK):
 		if f.endswith('.lock.json'):
-			with open('./dummy_test/{}'.format(f)) as id_rev:
+			with open('./{}/{}'.format(COOKBOOK, f)) as id_rev:
 				var = id_rev.readlines()[1].split(':')[1]
 				regex = r"(?<=\")([^\"]+)(?=\")"
 				m = re.search(regex, var)
@@ -61,7 +68,7 @@ def tar(item):
 	if to_check in os.listdir('./tarball'):
 		print to_check + " already exist"
 	else:
-		os.system("chef export ./dummy_test/{}.rb -a tarball".format(pol))
+		os.system("chef export ./{}/{}.rb -a tarball".format(COOKBOOK, pol))
 				
 # EMPTY FILE
 def empty(filename, id_revision):
@@ -92,15 +99,15 @@ def empty_or_not(filename, id_revision):
 
 # MAIN
 def main(filename, id_revision):
-	if os.path.isfile('./versions/{}'.format(filename)):
+	if os.path.isfile('./{}/{}'.format(VERSIONS, filename)):
 		# ->
-		empty_or_not('./versions/{}'.format(filename), id_revision)
+		empty_or_not('./{}/{}'.format(VERSIONS, filename), id_revision)
 	else:
 		print "{} was created".format(filename)
 		# file with permission 664
-		subprocess.call(['touch', './versions/{}'.format(filename)])
+		subprocess.call(['touch', './{}/{}'.format(VERSIONS, filename)])
 		# ->
-		empty_or_not('./versions/{}'.format(filename), id_revision)
+		empty_or_not('./{}/{}'.format(VERSIONS, filename), id_revision)
 
 # RUN main()
 def run():
@@ -110,8 +117,8 @@ def run():
 		
 # EXECUTE script
 if __name__ == '__main__':
-	if os.path.isdir('./versions'):
+	if os.path.isdir('./{}'.format(VERSIONS)):
 		run()
 	else:
-		os.system('mkdir -p versions')
+		os.system('mkdir -p {}'.format(VERSIONS))
 		run()	
