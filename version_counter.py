@@ -8,6 +8,10 @@ import re
 # next 0.1.1
 # max 9.9.9
 
+# TO DO:
+# file not empty (under consideration if empty lines)
+# what happen if one of the policies version is 9.9.9 ? -> policyver.write(version_counter(vers).... append the same line
+
 ## DIRECTORIES
 COOKBOOK = 'dummy_test'
 VERSIONS = 'versions'
@@ -32,12 +36,6 @@ def version_counter(ver):
 		return ver
 
 ## WORK WITH FILE
-# TO DO:
-# file not empty (under consideration if empty lines)
-# what happen if one of the policies version is 9.9.9 ? -> policyver.write(version_counter(vers).... append the same line
-
-
-# sprawdzic co sie stanie jesli jedno policy ma 3 wersje a inne policy tylko 1
 
 # VERIFY IF LOCK.JSON EXIST
 def if_json_exist():
@@ -82,13 +80,15 @@ def not_empty(filename, id_revision):
 	#last_line = subprocess.check_output(['tail', '-1', filename])
 	#vers, opa = last_line.strip().split(":")
 	with open(filename, 'a+') as policyver:
-		for i in policyver.readlines():
+		dix = {}
+		for i in policyver:
 			vers, opa = i.split(":")
-			if opa.strip() == id_revision:
-				print "For %s requested id_revision:%s already exist under version:%s" %(filename, opa.strip(), vers)
-				break
-			else:
-				policyver.write(version_counter(vers) + ':' + id_revision + '\n')
+			dix[opa.strip()] = vers
+		if id_revision in dix.keys():
+			print "Requested {} exist under version {}".format(id_revision, dix[id_revision])
+		else:
+			print "else", id_revision
+			policyver.write(version_counter(sorted(dix.values())[-1]) + ':' + id_revision + '\n')
 
 # EMPTY OR NOT
 def empty_or_not(filename, id_revision):
