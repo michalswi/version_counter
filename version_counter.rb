@@ -92,15 +92,15 @@ def not_empty(filename, id_revision)
 	#last_line = File.open(filename).to_a.last.chomp
 	#vers, opa = last_line.strip().split(":")
 	File.open(filename, 'a+') do |policyver|
-		var = policyver.readlines()
-		var.each do |i|
+		dix = {}
+		policyver.each do |i|
 			vers, opa = i.split(':')
-			if opa.chomp() == id_revision
-				p "For #{filename} requested id_revision:#{id_revision} already exist under version:#{vers}"
-				break
-			else
-				policyver.write("#{version_counter(vers)}:#{id_revision}\n")
-			end
+			dix[opa.chomp()] = vers
+		end
+		if dix.keys().include? id_revision
+			p "Requested #{id_revision} exist under version #{dix[id_revision]}"
+		else
+			policyver.write("#{version_counter((dix.values().sort!)[-1])}:#{id_revision}\n")
 		end
 	end
 end
