@@ -29,10 +29,9 @@ What 'counter' do:
 Last step is to push archive (from './tarball') with the proper version (taken from './versions', for example 'ntp_policy')  to chef-server.
 
 ```ruby
-$ chef push-archive 0.1.0 ./tarball/ntp_policy-6836c30d803e7c3c69b682b8a25875a555a0e0cbe659f9b3adf8480840d38046.tgz
+$ chef push-archive 0.1.0 ./tarball/ntp_policy-6836c30d803e7c3c...46.tgz
 $ chef show-policy
 ntp_policy
 ==========
-
-* 0.1.0:  fe9a565ea4
+* 0.1.0:  6836c30d80
 ```
