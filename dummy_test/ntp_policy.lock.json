@@ -1,19 +1,19 @@
 {
-  "revision_id": "82be6cd7b3ebaecc4f2c538fc277876d4ca0a1bb46cf1aa91dfd09534f03f88b",
+  "revision_id": "08476a935b565da7d3d58c3e5652bcb25876d951a96cc97489eb4e0aecfcd1a0",
   "name": "ntp_policy",
   "run_list": [
     "recipe[ntp::default]"
   ],
   "cookbook_locks": {
     "ntp": {
-      "version": "3.0.0",
-      "identifier": "6a84d7d3176d57ba93fe2154d81caaa69afd48da",
-      "dotted_decimal_identifier": "29982410025692503.52517065358366748.187632541583578",
-      "cache_key": "ntp-3.0.0-supermarket.chef.io",
-      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/ntp/versions/3.0.0/download",
+      "version": "2.0.3",
+      "identifier": "bd5c23609c9afec18e868c66f2019b0bf815de62",
+      "dotted_decimal_identifier": "53300077612800766.54481379037475329.170475709128290",
+      "cache_key": "ntp-2.0.3-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/ntp/versions/2.0.3/download",
       "source_options": {
-        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/ntp/versions/3.0.0/download",
-        "version": "3.0.0"
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/ntp/versions/2.0.3/download",
+        "version": "2.0.3"
       }
     },
     "windows": {
@@ -60,7 +60,7 @@
     "Policyfile": [
       [
         "ntp",
-        "= 3.0.0"
+        "= 2.0.3"
       ],
       [
         "windows",
@@ -76,7 +76,7 @@
       ]
     ],
     "dependencies": {
-      "ntp (3.0.0)": [
+      "ntp (2.0.3)": [
         [
           "windows",
           ">= 1.38.0"
