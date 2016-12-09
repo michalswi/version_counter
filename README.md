@@ -26,10 +26,10 @@ What 'counter' do:
 
 - 'counter' based on policyfiles will generate tarballs in directory 'tarball'
 
-Last step is to push archive (from './tarball') with the proper version (taken from './versions', for example 'ntp_policy')  to chef-server.
+Last step is to push archive (from './tarball') with the proper version (taken from './versions', for example 'ntp_policy')  to chef-server (could be automated in the future).
 
 ```ruby
-$ chef push-archive 0.1.0 ./tarball/ntp_policy-6836c30d803e7c3c...46.tgz
+$ chef push-archive 0.1.0 tarball/ntp_policy-6836c30d80...6.tgz
 $ chef show-policy
 ntp_policy
 ==========

@@ -9,8 +9,8 @@ import re
 # max 9.9.9
 
 # TO DO:
-# file not empty (under consideration if empty lines)
-# what happen if one of the policies version is 9.9.9 ? -> policyver.write(version_counter(vers).... append the same line
+# policy version file not empty (empty lines)
+# what happen if one of the policies version is 9.9.9 ? -> answer: policyver.write(...) append the same line
 
 ## DIRECTORIES
 COOKBOOK = 'dummy_test'
