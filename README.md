@@ -1,7 +1,6 @@
 # policyfile version counter
 https://docs.chef.io/policyfile.html
 
-
 ### available counters
 - counter written in ruby [here](https://github.com/michalswi/version_counter/blob/master/version_counter.rb)
 - counter written in python [here](https://github.com/michalswi/version_counter/blob/master/version_counter.py)
