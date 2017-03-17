@@ -2,8 +2,8 @@
 https://docs.chef.io/policyfile.html
 
 ### available counters
-- counter written in ruby [here](https://github.ibm.com/michal-swierczewski/version_counter/blob/master/version_counter.rb)
-- counter written in python [here](https://github.ibm.com/michal-swierczewski/version_counter/blob/master/version_counter.py)
+- counter written in ruby [here](https://github.com/michalswi/version_counter/blob/master/version_counter.rb)
+- counter written in python [here](https://github.com/michalswi/version_counter/blob/master/version_counter.py)
 
 ### how it works
 'counter' based on *.lock.json files from dummy_test cookbook which stores policyfiles. Test policyfiles are ntp_policy.rb and sshd_policy.rb. 
